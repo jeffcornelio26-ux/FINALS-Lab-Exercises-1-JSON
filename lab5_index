@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 5: AJAX JSON Request</title>
+</head>
+<body>
+    <h2>User Greeting Form</h2>
+    
+    <form id="userForm">
+        <label for="nameInput">Name:</label>
+        <input type="text" id="nameInput" placeholder="Enter name" required>
+        <button type="submit">Send Request</button>
+    </form>
+
+    <h3>Raw JSON Response:</h3>
+    <pre id="responseOutput"></pre>
+
+    <script>
+    document.getElementById('userForm').addEventListener('submit', async function(event) {
+        event.preventDefault(); 
+        const name = document.getElementById('nameInput').value;
+        const outputElement = document.getElementById('responseOutput');
+
+        try {
+            const response = await fetch('lab5_process.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name: name })
+            });
+
+            const data = await response.json();
+
+            outputElement.textContent = JSON.stringify(data);
+        } catch (error) {
+            outputElement.textContent = 'Error connecting to the server.';
+            console.error('Error details:', error);
+        }
+    });
+</script>
+</body>
+</html>
