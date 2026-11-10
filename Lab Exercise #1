@@ -1,0 +1,15 @@
+<?php
+$student = [
+    "name" => "Elmer Jeff",
+    "age" => 21,
+    "course" => "IT"
+];
+
+
+$jsonString = json_encode($student);
+
+
+echo $jsonString;
+
+?>
+
