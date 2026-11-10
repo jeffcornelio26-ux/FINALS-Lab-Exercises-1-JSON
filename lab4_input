@@ -1,0 +1,15 @@
+<?php
+$jsonInput = file_get_contents('php://input');
+
+
+$data = json_decode($jsonInput, true);
+
+
+if ($data && isset($data['username']) && isset($data['password'])) {
+    echo "Username: " . $data['username'] . "<br>";
+    echo "Password: " . $data['password'];
+} else {
+    echo "Please send a valid JSON payload with 'username' and 'password'.";
+}
+?>
+
